@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/cv/preview" method="post" th:object="${cvData}">
+    <input type="text" th:field="*{fullName}" placeholder="Ім'я" required>
+    <input type="email" th:field="*{email}" placeholder="Email">
+    <input type="text" th:field="*{phone}" placeholder="Телефон">
+    <textarea th:field="*{summary}" placeholder="Про себе"></textarea>
+    <button type="submit">Попередній перегляд</button>
+</form>
+
+</body>
+</html>

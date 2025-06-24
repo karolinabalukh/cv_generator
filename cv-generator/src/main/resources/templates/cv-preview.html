@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 th:text="${cv.fullName}">Ім'я</h2>
+<p>Email: <span th:text="${cv.email}"></span></p>
+<p>Телефон: <span th:text="${cv.phone}"></span></p>
+<p>Про себе: <span th:text="${cv.summary}"></span></p>
+<a href="#">Завантажити в PDF</a>
+</body>
+</html>

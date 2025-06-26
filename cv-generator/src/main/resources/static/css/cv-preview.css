@@ -1,0 +1,127 @@
+.cv-container {
+    display: flex;
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.cv-header {
+    background-color: #003366;
+    color: #fff;
+    width: 35%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.cv-header h1 {
+    font-size: 28px;
+    margin: 0 0 5px;
+}
+
+.cv-header h2 {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 20px;
+    color: #cce5ff;
+}
+
+.contact-info {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.contact-item {
+    margin-bottom: 8px;
+}
+
+.contact-item a {
+    color: #cce5ff;
+    text-decoration: none;
+}
+
+.cv-main {
+    width: 65%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.cv-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 5px;
+}
+
+.section-content p,
+.section-content ul {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.skills-list {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.timeline {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.timeline-item {
+    margin-bottom: 20px;
+}
+
+.timeline-period {
+    font-weight: bold;
+    font-size: 13px;
+    color: #555;
+}
+
+.timeline-content h4 {
+    margin: 5px 0 3px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.cv-footer {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 0;
+}
+
+.download-btn {
+    background-color: #003366;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #0055aa;
+}

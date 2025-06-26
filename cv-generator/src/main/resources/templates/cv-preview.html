@@ -1,14 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/cv-preview.css}">
+    <link rel="icon" href="/images/logo.png" type="image/jpg">
 </head>
 <body>
-<h2 th:text="${cv.fullName}">Ім'я</h2>
-<p>Email: <span th:text="${cv.email}"></span></p>
-<p>Телефон: <span th:text="${cv.phone}"></span></p>
-<p>Про себе: <span th:text="${cv.summary}"></span></p>
-<a href="#">Завантажити в PDF</a>
+<div id="cvContent" class="cv-container">
+    <header class="cv-header">
+        <div class="header-content">
+            <h1 th:text="${cv.firstName} + ' ' + ${cv.lastName}">Full name</h1>
+            <h2 th:text="${cv.title}">Position</h2>
+            <div class="contact-info">
+                <div th:if="${cv.email}" class="contact-item">
+                    <span th:text="${cv.email}">email@example.com</span>
+                </div>
+                <div th:if="${cv.phone}" class="contact-item">
+                    <span th:text="${cv.phone}">+380...</span>
+                </div>
+                <div th:if="${cv.address}" class="contact-item">
+                    <span th:text="${cv.address} + ', ' + ${cv.city} + ' ' + ${cv.postalCode}">Адреса</span>
+                </div>
+                <div th:if="${cv.website}" class="contact-item">
+                    <a th:href="${cv.website}" th:text="${cv.website}">Website</a>
+                </div>
+                <div th:if="${cv.linkedin}" class="contact-item">
+                    <a th:href="${cv.linkedin}" th:text="${cv.linkedin}">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cv-main">
+        <section th:if="${cv.summary}" class="cv-section">
+            <h3 class="section-title"><span>About me</span></h3>
+            <div class="section-content">
+                <p th:text="${cv.summary}">Text about me</p>
+            </div>
+        </section>
+
+        <section th:if="${not #lists.isEmpty(cv.skills)}" class="cv-section">
+            <h3 class="section-title"><span>Skills</span></h3>
+            <div class="section-content">
+                <ul class="skills-list">
+                    <li th:each="skill : ${cv.skills}" th:text="${skill}">Skill</li>
+                </ul>
+            </div>
+        </section>
+
+        <section th:if="${not #lists.isEmpty(cv.educations)}" class="cv-section">
+            <h3 class="section-title"><span>Education</span></h3>
+            <div class="section-content">
+                <ul class="timeline">
+                    <li th:each="edu : ${cv.educations}" class="timeline-item">
+                        <div class="timeline-period" th:text="${edu.year}"></div>
+                        <div class="timeline-content">
+                            <h4 th:text="${edu.institution}"></h4>
+                            <p th:text="${edu.degree}"></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section th:if="${not #lists.isEmpty(cv.expertises)}" class="cv-section">
+            <h3 class="section-title"><span>Work experience</span></h3>
+            <div class="section-content">
+                <ul class="timeline">
+                    <li th:each="exp : ${cv.expertises}" class="timeline-item">
+                        <div class="timeline-period" th:text="${exp.duration}"></div>
+                        <div class="timeline-content">
+                            <h4 th:text="${exp.company}"></h4>
+                            <p th:text="${exp.position}"></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="cv-footer">
+        <button id="downloadPdfBtn" class="download-btn">Download PDF</button>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+            const element = document.getElementById('cvContent');
+            const button = document.getElementById('downloadPdfBtn');
+            button.style.display = 'none';
+            setTimeout(() => {
+                const opt = {
+                    margin:       0,
+                    filename:     'cv.pdf',
+                    image:        { type: 'jpeg', quality: 0.98 },
+                    html2canvas:  { scale: 2 },
+                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                html2pdf().set(opt).from(element).save().then(() => {
+                    button.style.display = 'inline-block';
+                });
+            }, 100); 
+        });
+    </script>
+
+
+</div>
 </body>
 </html>
